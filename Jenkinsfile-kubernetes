@@ -41,7 +41,7 @@ spec:
     stage('Checkout') {
       steps {
         container('maven') {
-          git branch: 'main', url: '<URL>'
+          git branch: 'main', url: 'https://github.com/heosuu/js-webapp'
         }
       }
     }
@@ -62,19 +62,19 @@ spec:
     stage('Build & Tag & Push Docker Image') {
       steps {
         container('kaniko') {
-          sh 'executor --context=dir:///home/jenkins/agent/workspace/kube_pipeline/ --destination=<IMAGE>:$BUILD_NUMBER --destination=<IMAGE>:latest'
+          sh 'executor --context=dir://$WORKSPACE --destination=heosuu/myweb:$BUILD_NUMBER --destination=heosuu/myweb:latest'
         }
       }
     }
     stage('Update K8s Manifests & Push') {
       environment {
-        githubUser = '<GITHUB_YOURNAME>' //Ryan Jang
-        githubEmail = '<GITHUB_EMAIL>' //c1t1d0s7@example.com
-        githubId = '<GITHUB_USERNAME>' //c1t1d0s7 
-        githubRepo = '<GITHUB_REPO_NAME>' //jenkins-kube-deploy
+        githubUser = '<GITHUB_YOURNAME>' //heosuu
+        githubEmail = '<GITHUB_EMAIL>' //heosuu
+        githubId = '<GITHUB_USERNAME>' //heosuu
+        githubRepo = '<GITHUB_REPO_NAME>' //forargo
         githubURL = "https://github.com/${githubId}/${githubRepo}.git"
-        dockerhubId = '<DOCKER_HUB_USERNAME>' //c1t1d0s7
-        dockerhubRepo = '<DOCKER_HUB_REPO_NAME>' //hello-world
+        dockerhubId = '<DOCKER_HUB_USERNAME>' //heosuu
+        dockerhubRepo = '<DOCKER_HUB_REPO_NAME>' //myweb
       }
       steps {
         container('git') {
