@@ -69,7 +69,7 @@ spec:
     stage('Update K8s Manifests & Push') {
       environment {
         githubUser = '<GITHUB_YOURNAME>' //heosuu
-        githubEmail = '<GITHUB_EMAIL>' //heosuu
+        githubEmail = '<GITHUB_EMAIL>' //smilebeany@naver.com
         githubId = '<GITHUB_USERNAME>' //heosuu
         githubRepo = '<GITHUB_REPO_NAME>' //forargo
         githubURL = "https://github.com/${githubId}/${githubRepo}.git"
